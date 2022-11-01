@@ -1,0 +1,38 @@
+.space-out {
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.formWrapper {
+    /* --bs-card-spacer-y: 0.7rem; */
+    /* border: none; */
+    border-radius: 7px;
+    /* border: 1px solid red; */
+    background: #F5EFFF;
+    box-shadow: 4px 4px #CDC1FF;
+
+}
+
+.form-input {
+    /* width: 80vw; */
+    border: 1px solid red;
+    background: #ffffff;
+    /* box-shadow: 2px 2px #CDC1FF; */
+
+}
+
+.form-input:focus {
+    outline: none;
+}
+
+.myButton {
+    /* background: rgb(255, 255, 255); */
+    background: #7371FC;
+    /* width: 50px; */
+}
+
+.checkfield {
+    height: 12px;
+    width: 12px;
+}
