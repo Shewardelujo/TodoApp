@@ -1,0 +1,28 @@
+.actionBtn:hover {
+    cursor: pointer;
+
+}
+h3{
+    font-weight: 700;
+    /* background: #EFCEFA; */
+    font-size: 1.8rem;
+}
+.space-out {
+    margin:0 30px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.view{
+    /* background: #826c7f; */
+    background: #6b7b8c;
+    box-shadow: 0.043rem 0 0.5rem #8690a3;
+    border-radius: 15px;
+}
+.editPage{
+    height: 75vh;
+    
+}
+.desc{
+    font-weight: 600;
+    font-size:17px
+}

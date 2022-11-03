@@ -1,0 +1,104 @@
+<div class="d-md-flex justify-content-md-center">
+  <div class="col-md-7 mx-5 mb-3 mt-5 py-3 px-3">
+    <form #myForm="ngForm">
+      <div class="d-flex justify-content-between input-field">
+        <div class="col-9 d-flex align-items-center py-2">
+          <span class="mx-3">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+          <input
+            class="w-75 input-area"
+            type="text"
+            placeholder="Add a task"
+            name="task"
+            [(ngModel)]="form.searchInput"
+            #task="ngModel"
+            (keyup)="todoSearch($event)"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<h3
+  class="text-center"
+  *ngIf="
+    searchedTodoItems.length == 0 &&
+    searchedCompletedItems.length == 0 &&
+    noResult.length == 0
+  "
+>
+  No Search made
+</h3>
+<h3
+  class="text-center"
+  *ngIf="
+    noResult.length > 0 &&
+    searchedTodoItems.length == 0 &&
+    searchedCompletedItems.length == 0
+  "
+>
+  Search not found
+</h3>
+
+<div
+  *ngIf="searchedTodoItems.length !== 0 || searchedCompletedItems.length !== 0"
+>
+  <div>
+    <div class="card my-1 mx-5 py-0">
+      <div class="card-body addItem">Not Complete</div>
+    </div>
+  </div>
+  <div *ngFor="let todo of searchedTodoItems" class="mx-5">
+    <div class="card bg-white my-1 py-0">
+      <div class="card-body bg-white todoItem">
+        <div class="d-flex justify-content-between">
+          <div>
+            <input
+              type="checkbox"
+              class="form-input col-md-10 col-8 p-2 checkfield space-out"
+              name="status"
+              (click)="onStatusChecked(todo)"
+            />
+            <span class="todoIterator fs-0.5">
+              {{ todo.title }}
+            </span>
+          </div>
+          <div>
+            <span [routerLink]="['/todos/view-todo', todo.id]">
+              <i class="fa-regular fa-eye text-primary space-out actionBtn"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card my-1 mt-4 mx-5 py-0" *ngIf="completedList.length != 0">
+    <div class="card-body addItem">Completed</div>
+  </div>
+  <div *ngFor="let todo of searchedCompletedItems" class="mx-5">
+    <div class="card bg-white my-1 py-0">
+      <div class="card-body bg-white todoItem">
+        <div class="d-flex justify-content-between">
+          <div>
+            <input
+              type="checkbox"
+              class="form-input col-md-10 col-8 p-2 checkfield space-out"
+              name="status"
+              (click)="onStatusUnchecked(todo)"
+            />
+            <span class="todoIterator fs-0.5">
+              {{ todo.title }}
+            </span>
+          </div>
+          <div>
+            <span [routerLink]="['/todos/view-completed', todo.id]">
+              <i class="fa-regular fa-eye text-primary space-out actionBtn"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

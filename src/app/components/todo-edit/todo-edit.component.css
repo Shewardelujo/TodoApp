@@ -1,0 +1,38 @@
+.space-out {
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.formWrapper {
+   
+    border-radius: 10px;
+    background: #F5EFFF;
+    box-shadow: 4px 4px #CDC1FF;
+
+}
+
+.form-input {
+    border: none;
+    border-radius: 5px;
+    background: #ffffff;
+
+}
+
+.form-input:focus {
+    outline: none;
+}
+
+.myButton {
+    background: #3b4d61;
+    color: #ffffff;
+}
+
+.checkfield {
+    height: 12px;
+    width: 12px;
+}
+.desc {
+    font-weight: 500;
+    font-size: 17px
+}

@@ -1,0 +1,161 @@
+<h2 class="text-center mt-4 mb-2">TODO LIST</h2>
+
+<div>
+  <div
+    class="card my-1 mx-5 py-0"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal3"
+  >
+    <div class="card-body addItem">
+      Add a Todo Item
+      <span> <i class="fas-solid fa-plus space-out"></i></span>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal3"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add A Todo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="formWrapper m-3 mt-0 p-3 pt-4">
+            <div
+              class="text-center alert alert-danger"
+              *ngIf="myForm.dirty && myForm.invalid"
+            >
+              Please fill all the fields!
+            </div>
+            <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+              <div class="d-flex mb-3">
+                <label class="col-4 desc">Title</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Add a task"
+                  class="form-input col-8 p-2"
+                  name="task"
+                  [(ngModel)]="form.title"
+                  #task="ngModel"
+                />
+              </div>
+              <div class="d-flex mb-3">
+                <label class="col-4 desc">Description</label>
+                <textarea
+                  required
+                  type="text"
+                  placeholder="Task Description"
+                  class="form-input col-8 p-2"
+                  name="body"
+                  [(ngModel)]="form.body"
+                  #body="ngModel"
+                  rows="3"
+                  cols="25"
+                ></textarea>
+              </div>
+              <div class="d-flex mb-3">
+                <label class="col-4 desc">Date Added</label>
+                <input
+                  required
+                  type="date"
+                  class="form-input col-8 p-2"
+                  name="dateAdded"
+                  [(ngModel)]="form.dateAdded"
+                  #dateAdded="ngModel"
+                />
+              </div>
+              <div class="d-flex mb-3">
+                <label class="col-4 desc">Due Date</label>
+                <input
+                  required
+                  type="date"
+                  class="form-input col-8 p-2"
+                  name="dueDate"
+                  [(ngModel)]="form.dueDate"
+                  #dueDate="ngModel"
+                />
+              </div>
+              <div class="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-white text-primary myButton"
+                  [disabled]="myForm.invalid"
+                >
+                  <span> <i class="fas-solid fa-plus"></i></span>
+
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let todo of todoList" class="mx-5">
+  <div class="card bg-white my-1 py-0">
+    <div class="card-body bg-white todoItem">
+      <div class="d-flex justify-content-between">
+        <div>
+          <input
+            type="checkbox"
+            class="form-input col-md-10 col-8 p-2 checkfield space-out"
+            name="status"
+            (click)="onStatusChecked(todo)"
+          />
+          <span class="todoIterator fs-0.5">
+            {{ todo.title }}
+          </span>
+        </div>
+        <div>
+          <span [routerLink]="['/todos/view-todo', todo.id]">
+            <i class="fa-regular fa-eye text-primary space-out actionBtn"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card my-1 mt-4 mx-5 py-0" *ngIf="completedList.length != 0">
+  <div class="card-body addItem">Completed</div>
+</div>
+<div *ngFor="let todo of completedList" class="mx-5">
+  <div class="card bg-white my-1 py-0">
+    <div class="card-body bg-white todoItem">
+      <div class="d-flex justify-content-between">
+        <div>
+          <input
+            type="checkbox"
+            class="form-input col-md-10 col-8 p-2 checkfield space-out"
+            name="status"
+            (click)="onStatusUnchecked(todo)"
+          />
+          <span class="todoIterator fs-0.5">
+            {{ todo.title }}
+          </span>
+        </div>
+        <div>
+          <span [routerLink]="['/todos/view-completed', todo.id]">
+            <i class="fa-regular fa-eye text-primary space-out actionBtn"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

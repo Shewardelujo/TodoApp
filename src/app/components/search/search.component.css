@@ -1,0 +1,46 @@
+.input-field{
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.input-area{
+    border: none;
+}
+.input-area:focus {
+    outline: none;
+}
+.myBtn {
+    border: none !important;
+    border-left: 1px solid black !important;
+}.myBtn:hover {
+    border: none !important;
+    border-left: 1px solid black !important;
+}
+
+
+.space-out {
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.addItem {
+    background: #F5EFFF;
+}
+
+.addItem:hover {
+    background: #e4ddff;
+    color: #020085;
+}
+
+.checkfield {
+    height: 12px;
+    width: 12px;
+}
+.actionBtn{
+    font-size: 25px;
+}
+
+.actionBtn:hover {
+    cursor: pointer;
+
+}

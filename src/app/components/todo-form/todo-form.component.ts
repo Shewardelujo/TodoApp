@@ -1,5 +1,5 @@
-import { todoList } from './../todoList';
 import { Component, OnInit } from '@angular/core';
+import { todoList } from 'src/app/todoList';
 import { TodoList } from '../todo-list/todo';
 
 @Component({

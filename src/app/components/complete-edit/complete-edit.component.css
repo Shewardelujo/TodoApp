@@ -1,0 +1,32 @@
+.space-out {
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.formWrapper {
+
+    border-radius: 7px;
+    background: #F5EFFF;
+    box-shadow: 4px 4px #CDC1FF;
+
+}
+
+.form-input {
+    border: 1px solid red;
+    background: #ffffff;
+
+}
+
+.form-input:focus {
+    outline: none;
+}
+
+.myButton {
+    background: #7371FC;
+}
+
+.checkfield {
+    height: 12px;
+    width: 12px;
+}

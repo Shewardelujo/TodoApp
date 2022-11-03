@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TodoServiceService } from 'src/app/services/todo-service.service';
 import { TodoList } from '../todo-list/todo';
 
 @Component({
@@ -10,10 +11,15 @@ import { TodoList } from '../todo-list/todo';
 export class TodoDetailComponent implements OnInit {
   todoArray!: TodoList[];
   singleTodo!: TodoList;
+  todoList: TodoList[] = [];
+
   id!: any;
   // id$ = this.router.paramMap.pipe(map((params) => params.get('id')));
 
-  constructor(private router: ActivatedRoute) {}
+  constructor(
+    private router: ActivatedRoute,
+    private todoService: TodoServiceService
+  ) {}
 
   ngOnInit(): void {
     // console.log(this.id$);
@@ -23,13 +29,19 @@ export class TodoDetailComponent implements OnInit {
     this.getTodoById(this.id);
   }
   getTodoById(id: any) {
-    const localData = localStorage.getItem('todoItems');
-    console.log('localData', localData);
-    if (localData !== null) {
-      this.todoArray = JSON.parse(localData);
-      console.log('todoArray', this.todoArray);
-      this.singleTodo = this.todoArray.filter((todo) => todo.id == id)[0];
-      console.log(this.singleTodo);
+    this.singleTodo = this.todoService.getTodo(id);
+  }
+  deleteActiveTodo(todo: TodoList) {
+    const storedData = localStorage.getItem('todoItems');
+    if (storedData != null) {
+      const List = JSON.parse(storedData);
+      console.log(List);
+      this.todoList = List.filter(
+        (eachTodo: TodoList) => eachTodo.id !== todo.id
+      );
     }
+    localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+    // location.reload();
+    window.location.replace('/todos');
   }
 }

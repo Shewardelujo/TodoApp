@@ -1,3 +1,3 @@
-import { TodoList } from './todo-list/todo';
+import { TodoList } from './components/todo-list/todo';
 
 export const todoList: TodoList[] = [];

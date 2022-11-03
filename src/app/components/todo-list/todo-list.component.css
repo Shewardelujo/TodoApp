@@ -3,22 +3,26 @@
     font-size: 20px;
     font-weight: 500;
 }
-
+.addItem{
+    background: #F5EFFF;
+}
+.addItem:hover{
+    background: #e4ddff;
+    color: #020085;
+}
 .formWrapper {
-    /* --bs-card-spacer-y: 0.7rem; */
-    /* border: none; */
+    
     border-radius: 7px;
-    /* border: 1px solid red; */
     background: #F5EFFF;
     box-shadow: 4px 4px #CDC1FF;
 
 }
 
 .form-input {
-    /* width: 80vw; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    border: none;
+    border-radius: 5px;
     background: #ffffff;
-    /* box-shadow: 2px 2px #CDC1FF; */
 
 }
 
@@ -27,16 +31,19 @@
 }
 
 .myButton {
-    /* background: rgb(255, 255, 255); */
     background: #7371FC;
-    /* width: 50px; */
+    color: #ffffff !important;
 }
 
 .checkfield {
     height: 12px;
     width: 12px;
 }
-.todoItem:hover {
+.actionBtn:hover {
     cursor: pointer;
-    background: #F5EFFF !important;
+
+}
+.desc {
+    font-weight: 600;
+    font-size: 17px
 }
