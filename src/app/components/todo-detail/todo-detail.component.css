@@ -4,7 +4,6 @@
 }
 h3{
     font-weight: 700;
-    /* background: #EFCEFA; */
     font-size: 1.8rem;
 }
 .space-out {
@@ -13,10 +12,9 @@ h3{
     font-weight: 500;
 }
 .view{
-    /* background: #826c7f; */
-    background: #6b7b8c;
-    /* box-shadow: 0.043rem 0 0.5rem #8690a3; */
+    background: #2e4b68;
     border-radius: 15px;
+    margin: 0 auto !important;
 }
 .editPage{
     height: 75vh;
@@ -30,7 +28,6 @@ h3{
 @media screen and (max-width: 580px) {
     .view {
         width: 60vw;
-        /* height: 85vh; */
     }
 
 }@media screen and (max-width: 350px) {

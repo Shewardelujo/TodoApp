@@ -6,14 +6,15 @@
 
 .formWrapper {
 
-    border-radius: 7px;
+    border-radius: 10px;
     background: #F5EFFF;
     box-shadow: 4px 4px #CDC1FF;
 
 }
 
 .form-input {
-    border: 1px solid red;
+    border: none;
+    border-radius: 5px;
     background: #ffffff;
 
 }
@@ -23,10 +24,16 @@
 }
 
 .myButton {
-    background: #7371FC;
+    background: #3b4d61;
+    color: #ffffff;
 }
 
 .checkfield {
     height: 12px;
     width: 12px;
+}
+
+.desc {
+    font-weight: 500;
+    font-size: 17px
 }

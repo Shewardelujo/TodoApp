@@ -1,8 +1,8 @@
-<h2 class="text-center mt-4 mb-2">TODO LIST</h2>
+<h2 class="text-center mt-4 mb-4 mb-2">Todo List</h2>
 
 <div>
   <div
-    class="card my-1 mx-5 py-0"
+    class="card my-1 mx-md-5 py-0"
     data-bs-toggle="modal"
     data-bs-target="#exampleModal3"
   >
@@ -107,7 +107,7 @@
   </div>
 </div>
 
-<div *ngFor="let todo of todoList" class="mx-5">
+<div *ngFor="let todo of todoList" class="mx-md-5">
   <div class="card bg-white my-1 py-0">
     <div class="card-body bg-white todoItem">
       <div class="d-flex justify-content-between">
@@ -124,7 +124,7 @@
         </div>
         <div>
           <span [routerLink]="['/todos/view-todo', todo.id]">
-            <i class="fa-regular fa-eye text-primary space-out actionBtn"></i>
+            <i class="fa-regular fa-eye space-out actionBtn"></i>
           </span>
         </div>
       </div>
@@ -132,10 +132,10 @@
   </div>
 </div>
 
-<div class="card my-1 mt-4 mx-5 py-0" *ngIf="completedList.length != 0">
-  <div class="card-body addItem">Completed</div>
+<div class="card my-1 mt-4 mx-md-5 py-0" *ngIf="completedList.length != 0">
+  <div class="card-body completedItem">Completed</div>
 </div>
-<div *ngFor="let todo of completedList" class="mx-5">
+<div *ngFor="let todo of completedList" class="mx-md-5">
   <div class="card bg-white my-1 py-0">
     <div class="card-body bg-white todoItem">
       <div class="d-flex justify-content-between">

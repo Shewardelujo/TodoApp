@@ -3,12 +3,18 @@
     font-size: 20px;
     font-weight: 500;
 }
-.addItem{
+
+.addItem {
     background: #F5EFFF;
 }
 .addItem:hover{
-    background: #e4ddff;
-    color: #020085;
+    background: #3b4d61;
+    transition: all 0.9s ease;
+    
+    color: #ffffff;
+}
+.completedItem {
+    background: #F5EFFF;
 }
 .formWrapper {
     
@@ -39,11 +45,15 @@
     height: 12px;
     width: 12px;
 }
+.actionBtn{
+    color: #3b4d61 !important;
+}
 .actionBtn:hover {
     cursor: pointer;
 
 }
 .desc {
     font-weight: 600;
-    font-size: 17px
+    font-size: 17px;
 }
+

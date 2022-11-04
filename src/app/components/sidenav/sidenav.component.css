@@ -23,6 +23,7 @@
     background: #fff;
     text-align: center;
     width: 3rem;
+    color: #2e4b68;
     min-width: none;
     border-radius: 0.313rem;
     padding: 0.313rem;
@@ -76,7 +77,7 @@
 
 .sidenav-nav-link:hover {
     background-color: #fff;
-    color: #000;
+    color: #2e4b68;
     width: 100%;
 }
 
