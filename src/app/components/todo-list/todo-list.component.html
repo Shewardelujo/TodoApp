@@ -114,6 +114,11 @@
           </span>
         </div>
         <div>
+          <span *ngIf="dueAlarm(todo.dueDate) <= timeUp">
+            <i
+              class="fa-regular fa-bell space-out space-out-alarm actionBtn"
+            ></i>
+          </span>
           <span [routerLink]="['/todos/view-todo', todo.id]">
             <i class="fa-regular fa-eye space-out actionBtn"></i>
           </span>

@@ -12,6 +12,8 @@ export class SearchComponent implements OnInit {
   completedList!: TodoList[];
   hideList: boolean = false;
 
+  timeUp!: Date;
+
   searchedTodoItems: TodoList[] = [];
   searchedCompletedItems: TodoList[] = [];
 
@@ -30,6 +32,11 @@ export class SearchComponent implements OnInit {
     if (completedData != null) {
       this.completedList = JSON.parse(completedData);
     }
+
+    this.timeUp = new Date();
+  }
+  dueAlarm(date: Date) {
+    return new Date(date);
   }
 
   todoSearch(event: any) {

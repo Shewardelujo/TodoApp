@@ -57,9 +57,16 @@
     font-size: 17px;
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 375px) {
     .space-out {
-        margin-right: 10px;
+        margin-right: 5px;
     }
+   .space-out-alarm{
+        margin-right: 10px;
+   }
 
+
+.card-body{
+    --bs-card-spacer-x: 0.5rem;
+}
 }
