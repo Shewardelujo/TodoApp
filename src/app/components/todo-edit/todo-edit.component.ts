@@ -14,6 +14,8 @@ export class TodoEditComponent implements OnInit {
 
   todoList!: TodoList[];
   id!: any;
+  currentDate: any = new Date();
+
   constructor(
     private router: ActivatedRoute,
     private todoService: TodoServiceService
@@ -42,17 +44,13 @@ export class TodoEditComponent implements OnInit {
     };
   }
   onSubmit() {
-    console.log('this.form', this.form);
     const updatedArray = this.todoList.map((todo) => {
       if (todo.id == this.id) {
-        return { ...this.form, id: this.id };
+        return { ...this.form, id: this.id, dateAdded: new Date() };
       }
       return todo;
     });
-    console.log(updatedArray);
-
     localStorage.setItem('todoItems', JSON.stringify(updatedArray));
-    console.log(updatedArray);
     window.location.replace('/todos');
   }
 }

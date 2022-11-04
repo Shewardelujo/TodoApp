@@ -31,16 +31,7 @@
               cols="25"
             ></textarea>
           </div>
-          <div class="d-flex mb-3">
-            <label class="col-4 desc">Date Added</label>
-            <input
-              type="date"
-              class="form-input col-8 p-2"
-              name="dateAdded"
-              [(ngModel)]="form.dateAdded"
-              #dateAdded="ngModel"
-            />
-          </div>
+
           <div class="d-flex mb-3">
             <label class="col-4 desc">Due Date</label>
             <input
@@ -49,6 +40,8 @@
               name="dueDate"
               [(ngModel)]="form.dueDate"
               #dueDate="ngModel"
+                  min="{{ currentDate | date: 'yyyy-MM-dd' }}"
+
             />
           </div>
 

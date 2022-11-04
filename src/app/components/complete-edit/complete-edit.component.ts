@@ -14,6 +14,8 @@ export class CompleteEditComponent implements OnInit {
 
   todoList!: TodoList[];
   id!: any;
+  currentDate: any = new Date();
+
   constructor(
     private router: ActivatedRoute,
     private todoService: TodoServiceService
@@ -30,6 +32,7 @@ export class CompleteEditComponent implements OnInit {
       console.log(this.todoList);
     }
   }
+
   getTodoById(id: any) {
     this.singleTodo = this.todoService.getCompleted(id);
     this.form = {
@@ -44,7 +47,7 @@ export class CompleteEditComponent implements OnInit {
   onSubmit() {
     const updatedArray = this.todoList.map((todo) => {
       if (todo.id == this.id) {
-        return { ...this.form, id: this.id };
+        return { ...this.form, id: this.id, dateAdded: new Date() };
       }
       return todo;
     });

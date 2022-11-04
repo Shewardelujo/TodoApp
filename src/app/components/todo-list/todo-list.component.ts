@@ -18,7 +18,7 @@ export class TodoListComponent implements OnInit {
   };
   todoList: TodoList[] = [];
   completedList: TodoList[] = [];
-  formVisible: boolean = false;
+  currentDate: any = new Date();
 
   constructor() {}
 
@@ -32,6 +32,7 @@ export class TodoListComponent implements OnInit {
       this.completedList = JSON.parse(completedData);
     }
   }
+
   onSubmit(myForm: NgForm) {
     this.form = { ...this.form, id: this.todoList.length + 1 };
     this.todoList.push(this.form);
@@ -46,9 +47,7 @@ export class TodoListComponent implements OnInit {
     });
     location.reload();
   }
-  toggleForm() {
-    this.formVisible = !this.formVisible;
-  }
+
   onStatusChecked(todo: TodoList) {
     const updatedTodo = { ...todo, status: !todo.status };
     const storedData = localStorage.getItem('todoItems');
@@ -62,6 +61,7 @@ export class TodoListComponent implements OnInit {
     localStorage.setItem('completedItems', JSON.stringify(this.completedList));
     localStorage.setItem('todoItems', JSON.stringify(this.todoList));
   }
+
   onStatusUnchecked(todo: TodoList) {
     const updatedTodo = { ...todo, status: !todo.status };
     const storedData = localStorage.getItem('completedItems');
