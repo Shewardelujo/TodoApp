@@ -26,3 +26,25 @@ h3{
     font-weight: 600;
     font-size:17px
 }
+
+@media screen and (max-width: 580px) {
+    .view {
+        width: 60vw;
+        /* height: 85vh; */
+    }
+
+}@media screen and (max-width: 350px) {
+  .view{
+    margin-top: 50px;
+  }
+    .structure {
+        display: flex;
+        flex-direction: column;
+    }
+    .corect{
+        width: 100%;
+    }
+    .desc{
+        font-weight: 800;
+    }
+}
