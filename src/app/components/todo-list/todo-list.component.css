@@ -37,7 +37,7 @@
 }
 
 .myButton {
-    background: #7371FC;
+    background: #3b4d61;
     color: #ffffff !important;
 }
 
@@ -57,3 +57,9 @@
     font-size: 17px;
 }
 
+@media screen and (max-width: 350px) {
+    .space-out {
+        margin-right: 10px;
+    }
+
+}

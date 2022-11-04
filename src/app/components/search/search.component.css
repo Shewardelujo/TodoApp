@@ -1,6 +1,10 @@
 .input-field{
-    border: 1px solid black;
+    border: 1px solid #3b4d61;
     border-radius: 15px;
+    
+}
+.text-color{
+    color: #3b4d61;
 }
 .input-area{
     border: none;
@@ -37,10 +41,16 @@
     width: 12px;
 }
 .actionBtn{
-    font-size: 25px;
+    color: #3b4d61 !important;
 }
 
 .actionBtn:hover {
     cursor: pointer;
+
+}
+@media screen and (max-width: 350px) {
+    .space-out {
+        margin-right: 10px;
+    }
 
 }

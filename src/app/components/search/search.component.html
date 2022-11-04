@@ -1,5 +1,16 @@
-<div class="d-md-flex justify-content-md-center">
-  <div class="col-md-7 mx-5 mb-3 mt-5 py-3 px-3">
+<h3
+  class="text-center text-color"
+  *ngIf="
+    searchedTodoItems.length == 0 &&
+    searchedCompletedItems.length == 0 &&
+    noResult.length == 0
+  "
+>
+  Search Todos
+</h3>
+
+<div class="d-md-flex justify-content-md-center text-color">
+  <div class="col-md-7 mx-md-5 mb-3 mt-3 py-3 px-3">
     <form #myForm="ngForm">
       <div class="d-flex justify-content-between input-field">
         <div class="col-9 d-flex align-items-center py-2">
@@ -9,7 +20,7 @@
           <input
             class="w-75 input-area"
             type="text"
-            placeholder="Add a task"
+            placeholder="Search..."
             name="task"
             [(ngModel)]="form.searchInput"
             #task="ngModel"
@@ -20,18 +31,9 @@
     </form>
   </div>
 </div>
+
 <h3
-  class="text-center"
-  *ngIf="
-    searchedTodoItems.length == 0 &&
-    searchedCompletedItems.length == 0 &&
-    noResult.length == 0
-  "
->
-  No Search made
-</h3>
-<h3
-  class="text-center"
+  class="text-center text-color"
   *ngIf="
     noResult.length > 0 &&
     searchedTodoItems.length == 0 &&
@@ -45,11 +47,11 @@
   *ngIf="searchedTodoItems.length !== 0 || searchedCompletedItems.length !== 0"
 >
   <div>
-    <div class="card my-1 mx-5 py-0">
+    <div class="card my-1 mx-md-5 py-0">
       <div class="card-body addItem">Not Complete</div>
     </div>
   </div>
-  <div *ngFor="let todo of searchedTodoItems" class="mx-5">
+  <div *ngFor="let todo of searchedTodoItems" class="mx-md-5">
     <div class="card bg-white my-1 py-0">
       <div class="card-body bg-white todoItem">
         <div class="d-flex justify-content-between">
@@ -74,10 +76,10 @@
     </div>
   </div>
 
-  <div class="card my-1 mt-4 mx-5 py-0" *ngIf="completedList.length != 0">
+  <div class="card my-1 mt-4 mx-md-5 py-0" *ngIf="completedList.length != 0">
     <div class="card-body addItem">Completed</div>
   </div>
-  <div *ngFor="let todo of searchedCompletedItems" class="mx-5">
+  <div *ngFor="let todo of searchedCompletedItems" class="mx-md-5">
     <div class="card bg-white my-1 py-0">
       <div class="card-body bg-white todoItem">
         <div class="d-flex justify-content-between">

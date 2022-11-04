@@ -31,6 +31,7 @@ export class SearchComponent implements OnInit {
       this.completedList = JSON.parse(completedData);
     }
   }
+
   todoSearch(event: any) {
     this.form.searchInput = event.target.value;
     const storedTodoData = localStorage.getItem('todoItems');

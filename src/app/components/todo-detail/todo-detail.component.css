@@ -32,7 +32,9 @@ h3{
 
 }@media screen and (max-width: 350px) {
   .view{
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    /* margin-left: 0 !important;
+    margin-right: 0 !important; */
   }
     .structure {
         display: flex;
@@ -42,6 +44,6 @@ h3{
         width: 100%;
     }
     .desc{
-        font-weight: 800;
+        font-weight: 700;
     }
 }
