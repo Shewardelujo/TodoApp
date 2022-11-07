@@ -58,3 +58,9 @@ h3{
     }
        
 }
+@media screen and (min-width: 1212px) {
+    .pad-lg {
+        margin-left: 30px !important;
+    }
+
+}
