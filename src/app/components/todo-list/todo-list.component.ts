@@ -18,7 +18,8 @@ export class TodoListComponent implements OnInit {
   };
   todoList: TodoList[] = [];
   completedList: TodoList[] = [];
-  currentDate: any = new Date();
+  currentDate: Date = new Date();
+  timeUp!: Date;
 
   constructor() {}
 
@@ -31,6 +32,11 @@ export class TodoListComponent implements OnInit {
     if (completedData != null) {
       this.completedList = JSON.parse(completedData);
     }
+
+    this.timeUp = new Date();
+  }
+  dueAlarm(date: Date) {
+    return new Date(date);
   }
 
   onSubmit(myForm: NgForm) {
