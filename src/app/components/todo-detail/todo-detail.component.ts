@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoServiceService } from 'src/app/services/todo-service.service';
+import { TryBehaviorSubjectService } from 'src/app/services/try-behavior-subject-service.service';
 import { TodoList } from '../todo-list/todo';
 
 @Component({
@@ -18,7 +19,9 @@ export class TodoDetailComponent implements OnInit {
 
   constructor(
     private router: ActivatedRoute,
-    private todoService: TodoServiceService
+    private todoService: TodoServiceService,
+    private route: Router,
+    private TryBehaviorSubject: TryBehaviorSubjectService
   ) {}
 
   ngOnInit(): void {
@@ -32,16 +35,16 @@ export class TodoDetailComponent implements OnInit {
     this.singleTodo = this.todoService.getTodo(id);
   }
   deleteActiveTodo(todo: TodoList) {
-    const storedData = localStorage.getItem('todoItems');
-    if (storedData != null) {
-      const List = JSON.parse(storedData);
-      console.log(List);
-      this.todoList = List.filter(
-        (eachTodo: TodoList) => eachTodo.id !== todo.id
-      );
-    }
-    localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+    let storedData!: TodoList[];
+
+    this.TryBehaviorSubject.getTodoList.subscribe((res) => (storedData = res));
+
+    this.todoList = storedData.filter(
+      (eachTodo: TodoList) => eachTodo.id !== todo.id
+    );
+    this.TryBehaviorSubject.setTodoList(this.todoList);
+
     // location.reload();
-    window.location.replace('/todos');
+    this.route.navigateByUrl('/todos');
   }
 }

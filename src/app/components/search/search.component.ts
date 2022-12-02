@@ -39,8 +39,9 @@ export class SearchComponent implements OnInit {
   }
 
   todoSearch(event: any) {
-    let storedTodoData: TodoList[] = [];
     this.form.searchInput = event.target.value;
+
+    let storedTodoData!: TodoList[];
     this.TryBehaviorSubject.getTodoList.subscribe(
       (res) => (storedTodoData = res)
     );
@@ -52,7 +53,7 @@ export class SearchComponent implements OnInit {
       (eachTodo: TodoList) => !eachTodo.title.includes(this.form.searchInput)
     );
 
-    let storedCompletedData: TodoList[] = [];
+    let storedCompletedData!: TodoList[];
 
     this.TryBehaviorSubject.getCompletedList.subscribe(
       (res) => (storedCompletedData = res)
@@ -80,9 +81,10 @@ export class SearchComponent implements OnInit {
   }
 
   onStatusChecked(todo: TodoList) {
-    let storedData: TodoList[] = [];
-
     const updatedTodo = { ...todo, status: !todo.status };
+
+    let storedData!: TodoList[];
+
     this.TryBehaviorSubject.getTodoList.subscribe((res) => (storedData = res));
 
     this.todoList = storedData.filter(
@@ -90,8 +92,8 @@ export class SearchComponent implements OnInit {
     );
     this.completedList.push(updatedTodo);
 
+    this.TryBehaviorSubject.setCompletedList(this.completedList);
     this.TryBehaviorSubject.setTodoList(this.todoList);
-    this.TryBehaviorSubject.setTodoList(this.completedList);
 
     this.searchedCompletedItems.push(updatedTodo);
     this.searchedTodoItems = this.searchedTodoItems.filter(
@@ -99,9 +101,10 @@ export class SearchComponent implements OnInit {
     );
   }
   onStatusUnchecked(todo: TodoList) {
-    let storedData: TodoList[] = [];
-
     const updatedTodo = { ...todo, status: !todo.status };
+
+    let storedData!: TodoList[];
+
     this.TryBehaviorSubject.getCompletedList.subscribe(
       (res) => (storedData = res)
     );
@@ -111,8 +114,8 @@ export class SearchComponent implements OnInit {
     );
     this.todoList.push(updatedTodo);
 
+    this.TryBehaviorSubject.setCompletedList(this.completedList);
     this.TryBehaviorSubject.setTodoList(this.todoList);
-    this.TryBehaviorSubject.setTodoList(this.completedList);
 
     this.searchedTodoItems.push(updatedTodo);
     this.searchedCompletedItems = this.searchedCompletedItems.filter(

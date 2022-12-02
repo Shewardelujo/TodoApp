@@ -11,6 +11,7 @@ export class TryBehaviorSubjectService {
   public completedList!: BehaviorSubject<TodoList[]>;
 
   constructor() {
+    localStorage.getItem('todoList');
     // Create a new BehaviorSubject with an initial todo list
 
     this.todoList = new BehaviorSubject<TodoList[]>([]);
@@ -23,6 +24,7 @@ export class TryBehaviorSubjectService {
 
   setTodoList(todoList: TodoList[]) {
     this.todoList.next(todoList);
+    localStorage.setItem('todoItem', JSON.stringify(todoList));
   }
   get getCompletedList(): Observable<TodoList[]> {
     return this.completedList.asObservable();
@@ -31,5 +33,6 @@ export class TryBehaviorSubjectService {
 
   setCompletedList(todoList: TodoList[]) {
     this.completedList.next(todoList);
+    localStorage.setItem('completedItem', JSON.stringify(todoList));
   }
 }

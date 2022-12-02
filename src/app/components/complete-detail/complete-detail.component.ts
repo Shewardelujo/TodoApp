@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoServiceService } from 'src/app/services/todo-service.service';
+import { TryBehaviorSubjectService } from 'src/app/services/try-behavior-subject-service.service';
 import { TodoList } from '../todo-list/todo';
 
 @Component({
@@ -14,11 +15,16 @@ export class CompleteDetailComponent implements OnInit {
   id!: any;
   completedList: TodoList[] = [];
 
+  // myModal = new bootstrap.Modal(document.getElementById('exampleModal5'), {
+  //   keyboard: false,
+  // });
   // id$ = this.router.paramMap.pipe(map((params) => params.get('id')));
 
   constructor(
     private router: ActivatedRoute,
-    private todoService: TodoServiceService
+    private todoService: TodoServiceService,
+    private route: Router,
+    private TryBehaviorSubject: TryBehaviorSubjectService
   ) {}
 
   ngOnInit(): void {
@@ -32,16 +38,18 @@ export class CompleteDetailComponent implements OnInit {
     this.singleTodo = this.todoService.getCompleted(id);
   }
   deleteCompletedTodo(todo: TodoList) {
-    const storedData = localStorage.getItem('completedItems');
-    if (storedData != null) {
-      const List = JSON.parse(storedData);
-      console.log(List);
-      this.completedList = List.filter(
-        (eachTodo: TodoList) => eachTodo.id !== todo.id
-      );
-    }
-    localStorage.setItem('completedItems', JSON.stringify(this.completedList));
+    let storedData!: TodoList[];
+
+    this.TryBehaviorSubject.getCompletedList.subscribe(
+      (res) => (storedData = res)
+    );
+
+    this.completedList = storedData.filter(
+      (eachTodo: TodoList) => eachTodo.id !== todo.id
+    );
+    this.TryBehaviorSubject.setCompletedList(this.completedList);
+    // this.myModal.hide();
     // location.reload();
-    window.location.replace('/todos');
+    this.route.navigateByUrl('/todos');
   }
 }
