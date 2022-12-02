@@ -102,7 +102,9 @@ export class SearchComponent implements OnInit {
     let storedData: TodoList[] = [];
 
     const updatedTodo = { ...todo, status: !todo.status };
-    this.TryBehaviorSubject.getTodoList.subscribe((res) => (storedData = res));
+    this.TryBehaviorSubject.getCompletedList.subscribe(
+      (res) => (storedData = res)
+    );
 
     this.completedList = storedData.filter(
       (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
