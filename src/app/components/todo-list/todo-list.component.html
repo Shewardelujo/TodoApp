@@ -107,6 +107,7 @@
             type="checkbox"
             class="form-input col-md-10 col-8 p-2 checkfield space-out"
             name="status"
+            (change)="onStatusChecked(todo)"
           />
           <span class="todoIterator fs-0.5">
             {{ todo.title }}
@@ -139,6 +140,7 @@
             type="checkbox"
             class="form-input col-md-10 col-8 p-2 checkfield space-out"
             name="status"
+            (change)="onStatusUnchecked(todo)"
           />
           <span class="todoIterator fs-0.5">
             {{ todo.title }}

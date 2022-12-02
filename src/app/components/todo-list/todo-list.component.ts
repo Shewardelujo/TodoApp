@@ -62,14 +62,15 @@ export class TodoListComponent implements OnInit {
 
     this.todoList = [...this.todoList, this.form];
     console.log(this.todoList);
-    myForm.reset({
+    this.form = {
       id: 0,
       title: '',
       body: '',
       dateAdded: new Date(),
       dueDate: new Date(),
       status: false,
-    });
+    };
+    myForm.reset();
 
     // localStorage.setItem('todoItems', JSON.stringify(this.todoList));
     // console.log(this.todoList);
@@ -84,31 +85,44 @@ export class TodoListComponent implements OnInit {
     // location.reload();
   }
 
-  // onStatusChecked(todo: TodoList) {
-  //   const updatedTodo = { ...todo, status: !todo.status };
-  //   const storedData = localStorage.getItem('todoItems');
-  //   if (storedData != null) {
-  //     const List = JSON.parse(storedData);
-  //     this.todoList = List.filter(
-  //       (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-  //     );
-  //     this.completedList.push(updatedTodo);
-  //   }
-  //   localStorage.setItem('completedItems', JSON.stringify(this.completedList));
-  //   localStorage.setItem('todoItems', JSON.stringify(this.todoList));
-  // }
+  onStatusChecked(todo: TodoList) {
+    const updatedTodo = { ...todo, status: !todo.status };
+    // const storedData = localStorage.getItem('todoItems');
+    // if (storedData != null) {
+    //   const List = JSON.parse(storedData);
+    //   this.todoList = List.filter(
+    //     (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
+    //   );
+    //   this.completedList.push(updatedTodo);
+    // }
 
-  // onStatusUnchecked(todo: TodoList) {
-  //   const updatedTodo = { ...todo, status: !todo.status };
-  //   const storedData = localStorage.getItem('completedItems');
-  //   if (storedData != null) {
-  //     const List = JSON.parse(storedData);
-  //     this.completedList = List.filter(
-  //       (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-  //     );
-  //     this.todoList.push(updatedTodo);
-  //   }
-  //   localStorage.setItem('completedItems', JSON.stringify(this.completedList));
-  //   localStorage.setItem('todoItems', JSON.stringify(this.todoList));
-  // }
+    if (this.todoList.length != 0) {
+      this.todoList = this.todoList.filter(
+        (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
+      );
+      this.completedList.push(updatedTodo);
+    }
+    // localStorage.setItem('completedItems', JSON.stringify(this.completedList));
+    // localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+  }
+
+  onStatusUnchecked(todo: TodoList) {
+    const updatedTodo = { ...todo, status: !todo.status };
+    // const storedData = localStorage.getItem('completedItems');
+    // if (storedData != null) {
+    //   const List = JSON.parse(storedData);
+    //   this.completedList = List.filter(
+    //     (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
+    //   );
+    //   this.todoList.push(updatedTodo);
+    // }
+    if (this.completedList.length != 0) {
+      this.completedList = this.completedList.filter(
+        (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
+      );
+      this.todoList.push(updatedTodo);
+    }
+    // localStorage.setItem('completedItems', JSON.stringify(this.completedList));
+    // localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+  }
 }
