@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoServiceService } from 'src/app/services/todo-service.service';
 import { TryBehaviorSubjectService } from 'src/app/services/try-behavior-subject-service.service';
 import { TodoList } from '../todo-list/todo';
@@ -20,7 +22,8 @@ export class TodoEditComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     private todoService: TodoServiceService,
-    private TryBehaviorSubject: TryBehaviorSubjectService
+    private TryBehaviorSubject: TryBehaviorSubjectService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +55,7 @@ export class TodoEditComponent implements OnInit {
       return todo;
     });
     // localStorage.setItem('todoItems', JSON.stringify(updatedArray));
-    this.TryBehaviorSubject.setTodoList(this.todoList);
-    // window.location.replace('/todos');
+    this.TryBehaviorSubject.setTodoList(updatedArray);
+    this.route.navigateByUrl('/todos');
   }
 }

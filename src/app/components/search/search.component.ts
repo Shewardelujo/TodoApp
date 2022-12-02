@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TryBehaviorSubjectService } from 'src/app/services/try-behavior-subject-service.service';
 import { TodoList } from '../todo-list/todo';
 
 @Component({
@@ -21,17 +22,15 @@ export class SearchComponent implements OnInit {
   noTodoResult: TodoList[] = [];
   noResult: TodoList[] = [];
 
-  constructor() {}
+  constructor(private TryBehaviorSubject: TryBehaviorSubjectService) {}
 
   ngOnInit(): void {
-    const storedData = localStorage.getItem('todoItems');
-    if (storedData != null) {
-      this.todoList = JSON.parse(storedData);
-    }
-    const completedData = localStorage.getItem('completedItems');
-    if (completedData != null) {
-      this.completedList = JSON.parse(completedData);
-    }
+    this.TryBehaviorSubject.getTodoList.subscribe(
+      (res) => (this.todoList = res)
+    );
+    this.TryBehaviorSubject.getCompletedList.subscribe(
+      (res) => (this.completedList = res)
+    );
 
     this.timeUp = new Date();
   }
@@ -40,27 +39,32 @@ export class SearchComponent implements OnInit {
   }
 
   todoSearch(event: any) {
+    let storedTodoData: TodoList[] = [];
     this.form.searchInput = event.target.value;
-    const storedTodoData = localStorage.getItem('todoItems');
-    if (storedTodoData != null) {
-      const List = JSON.parse(storedTodoData);
-      this.searchedTodoItems = List.filter((eachTodo: TodoList) =>
-        eachTodo.title.includes(this.form.searchInput)
-      );
-      this.noTodoResult = List.filter(
-        (eachTodo: TodoList) => !eachTodo.title.includes(this.form.searchInput)
-      );
-    }
-    const storedCompletedData = localStorage.getItem('completedItems');
-    if (storedCompletedData != null) {
-      const List = JSON.parse(storedCompletedData);
-      this.searchedCompletedItems = List.filter((eachTodo: TodoList) =>
-        eachTodo.title.includes(this.form.searchInput)
-      );
-      this.noCompletedResult = List.filter(
-        (eachTodo: TodoList) => !eachTodo.title.includes(this.form.searchInput)
-      );
-    }
+    this.TryBehaviorSubject.getTodoList.subscribe(
+      (res) => (storedTodoData = res)
+    );
+
+    this.searchedTodoItems = storedTodoData.filter((eachTodo: TodoList) =>
+      eachTodo.title.includes(this.form.searchInput)
+    );
+    this.noTodoResult = storedTodoData.filter(
+      (eachTodo: TodoList) => !eachTodo.title.includes(this.form.searchInput)
+    );
+
+    let storedCompletedData: TodoList[] = [];
+
+    this.TryBehaviorSubject.getCompletedList.subscribe(
+      (res) => (storedCompletedData = res)
+    );
+
+    this.searchedCompletedItems = storedCompletedData.filter(
+      (eachTodo: TodoList) => eachTodo.title.includes(this.form.searchInput)
+    );
+    this.noCompletedResult = storedCompletedData.filter(
+      (eachTodo: TodoList) => !eachTodo.title.includes(this.form.searchInput)
+    );
+
     this.noResult = this.noTodoResult.concat(this.noCompletedResult);
 
     if (
@@ -76,17 +80,18 @@ export class SearchComponent implements OnInit {
   }
 
   onStatusChecked(todo: TodoList) {
+    let storedData: TodoList[] = [];
+
     const updatedTodo = { ...todo, status: !todo.status };
-    const storedData = localStorage.getItem('todoItems');
-    if (storedData != null) {
-      const List = JSON.parse(storedData);
-      this.todoList = List.filter(
-        (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-      );
-      this.completedList.push(updatedTodo);
-    }
-    localStorage.setItem('completedItems', JSON.stringify(this.completedList));
-    localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+    this.TryBehaviorSubject.getTodoList.subscribe((res) => (storedData = res));
+
+    this.todoList = storedData.filter(
+      (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
+    );
+    this.completedList.push(updatedTodo);
+
+    this.TryBehaviorSubject.setTodoList(this.todoList);
+    this.TryBehaviorSubject.setTodoList(this.completedList);
 
     this.searchedCompletedItems.push(updatedTodo);
     this.searchedTodoItems = this.searchedTodoItems.filter(
@@ -94,17 +99,18 @@ export class SearchComponent implements OnInit {
     );
   }
   onStatusUnchecked(todo: TodoList) {
+    let storedData: TodoList[] = [];
+
     const updatedTodo = { ...todo, status: !todo.status };
-    const storedData = localStorage.getItem('completedItems');
-    if (storedData != null) {
-      const List = JSON.parse(storedData);
-      this.completedList = List.filter(
-        (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-      );
-      this.todoList.push(updatedTodo);
-    }
-    localStorage.setItem('completedItems', JSON.stringify(this.completedList));
-    localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+    this.TryBehaviorSubject.getTodoList.subscribe((res) => (storedData = res));
+
+    this.completedList = storedData.filter(
+      (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
+    );
+    this.todoList.push(updatedTodo);
+
+    this.TryBehaviorSubject.setTodoList(this.todoList);
+    this.TryBehaviorSubject.setTodoList(this.completedList);
 
     this.searchedTodoItems.push(updatedTodo);
     this.searchedCompletedItems = this.searchedCompletedItems.filter(
