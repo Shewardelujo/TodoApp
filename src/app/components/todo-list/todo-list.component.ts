@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { TryBehaviorSubjectService } from 'src/app/services/try-behavior-subject-service.service';
 import { TodoList } from './todo';
 
 @Component({
@@ -22,32 +22,15 @@ export class TodoListComponent implements OnInit {
   currentDate: Date = new Date();
   timeUp!: Date;
 
-  constructor() {}
+  constructor(private TryBehaviorSubject: TryBehaviorSubjectService) {}
 
   ngOnInit(): void {
-    // Get items from local storage
-    // const storedData = JSON.parse(localStorage.getItem('todoItems') || '[]');
-    // const completedData = JSON.parse(
-    //   localStorage.getItem('completedItems') || '[]'
-    // );
-
-    // // Create a new BehaviorSubject with an initial todo list
-    // const todoListSubject = new BehaviorSubject<TodoList[]>(storedData);
-    // // Create an observable from the subject
-    // const todoListObservable = todoListSubject.asObservable();
-    // // Subscribe to the observable
-    // todoListObservable.subscribe((todoList) => {
-    //   this.todoList = todoList;
-    // });
-
-    // Create a new BehaviorSubject with an initial completed list
-    // const completedListSubject = new BehaviorSubject<TodoList[]>(completedData);
-    // // Create an observable from the subject
-    // const completedListObservable = completedListSubject.asObservable();
-    // // Subscribe to the observable
-    // completedListObservable.subscribe((completedList) => {
-    //   this.completedList = completedList;
-    // });
+    this.TryBehaviorSubject.getTodoList.subscribe(
+      (res) => (this.todoList = res)
+    );
+    this.TryBehaviorSubject.getCompletedList.subscribe(
+      (res) => (this.completedList = res)
+    );
 
     this.timeUp = new Date();
   }
@@ -62,6 +45,12 @@ export class TodoListComponent implements OnInit {
 
     this.todoList = [...this.todoList, this.form];
     console.log(this.todoList);
+
+    //store the updated TodoList into the behavior subject
+    this.TryBehaviorSubject.setTodoList(this.todoList);
+
+    // Update the form
+
     this.form = {
       id: 0,
       title: '',
@@ -71,30 +60,10 @@ export class TodoListComponent implements OnInit {
       status: false,
     };
     myForm.reset();
-
-    // localStorage.setItem('todoItems', JSON.stringify(this.todoList));
-    // console.log(this.todoList);
-    // myForm.reset({
-    //   id: 0,
-    //   title: '',
-    //   body: '',
-    //   dateAdded: new Date(),
-    //   dueDate: new Date(),
-    //   status: false,
-    // });
-    // location.reload();
   }
 
   onStatusChecked(todo: TodoList) {
     const updatedTodo = { ...todo, status: !todo.status };
-    // const storedData = localStorage.getItem('todoItems');
-    // if (storedData != null) {
-    //   const List = JSON.parse(storedData);
-    //   this.todoList = List.filter(
-    //     (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-    //   );
-    //   this.completedList.push(updatedTodo);
-    // }
 
     if (this.todoList.length != 0) {
       this.todoList = this.todoList.filter(
@@ -102,27 +71,24 @@ export class TodoListComponent implements OnInit {
       );
       this.completedList.push(updatedTodo);
     }
-    // localStorage.setItem('completedItems', JSON.stringify(this.completedList));
-    // localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+
+    //store the updated TodoList and completed List into the behavior subject
+    this.TryBehaviorSubject.setTodoList(this.todoList);
+    this.TryBehaviorSubject.setCompletedList(this.completedList);
   }
 
   onStatusUnchecked(todo: TodoList) {
     const updatedTodo = { ...todo, status: !todo.status };
-    // const storedData = localStorage.getItem('completedItems');
-    // if (storedData != null) {
-    //   const List = JSON.parse(storedData);
-    //   this.completedList = List.filter(
-    //     (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-    //   );
-    //   this.todoList.push(updatedTodo);
-    // }
+
     if (this.completedList.length != 0) {
       this.completedList = this.completedList.filter(
         (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
       );
       this.todoList.push(updatedTodo);
     }
-    // localStorage.setItem('completedItems', JSON.stringify(this.completedList));
-    // localStorage.setItem('todoItems', JSON.stringify(this.todoList));
+
+    //store the updated TodoList and completed List into the behavior subject
+    this.TryBehaviorSubject.setTodoList(this.todoList);
+    this.TryBehaviorSubject.setCompletedList(this.completedList);
   }
 }

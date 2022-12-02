@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TodoServiceService } from 'src/app/services/todo-service.service';
+import { TryBehaviorSubjectService } from 'src/app/services/try-behavior-subject-service.service';
 import { TodoList } from '../todo-list/todo';
 
 @Component({
@@ -18,7 +19,8 @@ export class TodoEditComponent implements OnInit {
 
   constructor(
     private router: ActivatedRoute,
-    private todoService: TodoServiceService
+    private todoService: TodoServiceService,
+    private TryBehaviorSubject: TryBehaviorSubjectService
   ) {}
 
   ngOnInit(): void {
@@ -26,11 +28,10 @@ export class TodoEditComponent implements OnInit {
       this.id = params.get('id');
     });
     this.getTodoById(this.id);
-    const storedData = localStorage.getItem('todoItems');
-    if (storedData != null) {
-      this.todoList = JSON.parse(storedData);
-      console.log(this.todoList);
-    }
+
+    this.TryBehaviorSubject.getTodoList.subscribe(
+      (res) => (this.todoList = res)
+    );
   }
   getTodoById(id: any) {
     this.singleTodo = this.todoService.getTodo(id);
@@ -50,7 +51,8 @@ export class TodoEditComponent implements OnInit {
       }
       return todo;
     });
-    localStorage.setItem('todoItems', JSON.stringify(updatedArray));
-    window.location.replace('/todos');
+    // localStorage.setItem('todoItems', JSON.stringify(updatedArray));
+    this.TryBehaviorSubject.setTodoList(this.todoList);
+    // window.location.replace('/todos');
   }
 }
