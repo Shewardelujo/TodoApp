@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoServiceService } from 'src/app/services/todo-service.service';
 import { TodoList } from '../todo-list/todo';
 
@@ -18,7 +18,8 @@ export class TodoEditComponent implements OnInit {
 
   constructor(
     private router: ActivatedRoute,
-    private todoService: TodoServiceService
+    private todoService: TodoServiceService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +52,7 @@ export class TodoEditComponent implements OnInit {
       return todo;
     });
     localStorage.setItem('todoItems', JSON.stringify(updatedArray));
-    window.location.replace('/todos');
+    // window.location.replace('/todos');
+    this.route.navigateByUrl('/todos');
   }
 }

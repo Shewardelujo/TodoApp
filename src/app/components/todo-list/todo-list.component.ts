@@ -18,6 +18,7 @@ export class TodoListComponent implements OnInit {
   };
   todoList: TodoList[] = [];
   completedList: TodoList[] = [];
+  totalTodo: TodoList[] = [];
   currentDate: Date = new Date();
   timeUp!: Date;
 
@@ -40,8 +41,11 @@ export class TodoListComponent implements OnInit {
   }
 
   onSubmit(myForm: NgForm) {
-    this.form = { ...this.form, id: this.todoList.length + 1 };
+    this.totalTodo = [...this.todoList, ...this.completedList];
+    this.form = { ...this.form, id: this.totalTodo.length + 1 };
+
     this.todoList.push(this.form);
+    console.log(this.todoList);
     localStorage.setItem('todoItems', JSON.stringify(this.todoList));
     myForm.reset({
       id: 0,

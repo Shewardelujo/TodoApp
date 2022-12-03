@@ -12,12 +12,12 @@
         <div class="row structure">
           <p class="col-4 desc corect">Date Added</p>
           <p class="col-8 corect">
-            {{ singleTodo.dateAdded | date: "medium" }}
+            {{ singleTodo.dateAdded | date : "medium" }}
           </p>
         </div>
         <div class="row structure">
           <p class="col-4 desc corect">Due Date</p>
-          <p class="col-8 corect">{{ singleTodo.dueDate | date: "medium" }}</p>
+          <p class="col-8 corect">{{ singleTodo.dueDate | date : "medium" }}</p>
         </div>
         <div class="row structure">
           <p class="col-4 desc corect">Done</p>
@@ -74,6 +74,7 @@
             <button
               type="button"
               class="btn btn-danger"
+              data-bs-dismiss="modal"
               (click)="deleteCompletedTodo(singleTodo)"
             >
               Yes
