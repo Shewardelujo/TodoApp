@@ -9,13 +9,36 @@ export class TryBehaviorSubjectService {
   //declared the variable and gave it a type behaviorSubject
   public todoList!: BehaviorSubject<TodoList[]>;
   public completedList!: BehaviorSubject<TodoList[]>;
+  todoItem!: TodoList[];
+  completedItem!: TodoList[];
 
   constructor() {
-    localStorage.getItem('todoList');
-    // Create a new BehaviorSubject with an initial todo list
+    //getting item from localStorage for persistence
+    const storedTodoData = localStorage.getItem('todoItem');
+    if (storedTodoData != null) {
+      const list = JSON.parse(storedTodoData);
+      console.log(list);
+      this.completedItem = list;
+    }
 
-    this.todoList = new BehaviorSubject<TodoList[]>([]);
-    this.completedList = new BehaviorSubject<TodoList[]>([]);
+    const storedCompletedItem = localStorage.getItem('completedItem');
+    if (storedCompletedItem != null) {
+      const list = JSON.parse(storedCompletedItem);
+      console.log(list);
+      this.todoItem = list;
+    }
+
+    // CREATE A NEW BEHAVIOR SUBJECT WITH AN INITIAL TODO LIST
+
+    this.todoList = new BehaviorSubject<TodoList[]>(this.todoItem || []);
+    this.completedList = new BehaviorSubject<TodoList[]>(
+      this.completedItem || []
+    );
+
+    // CREATE A NEW BEHAVIOR SUBJECT WITH AN INITIAL TODO LIST
+
+    // this.todoList = new BehaviorSubject<TodoList[]>([]);
+    // this.completedList = new BehaviorSubject<TodoList[]>([]);
   }
 
   get getTodoList(): Observable<TodoList[]> {

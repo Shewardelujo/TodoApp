@@ -15,9 +15,6 @@ export class CompleteDetailComponent implements OnInit {
   id!: any;
   completedList: TodoList[] = [];
 
-  // myModal = new bootstrap.Modal(document.getElementById('exampleModal5'), {
-  //   keyboard: false,
-  // });
   // id$ = this.router.paramMap.pipe(map((params) => params.get('id')));
 
   constructor(
@@ -48,7 +45,6 @@ export class CompleteDetailComponent implements OnInit {
       (eachTodo: TodoList) => eachTodo.id !== todo.id
     );
     this.TryBehaviorSubject.setCompletedList(this.completedList);
-    // this.myModal.hide();
     // location.reload();
     this.route.navigateByUrl('/todos');
   }
