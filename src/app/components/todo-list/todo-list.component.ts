@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { TodoServiceService } from 'src/app/services/todo-service.service';
 import { TryBehaviorSubjectService } from 'src/app/services/try-behavior-subject-service.service';
 import { TodoList } from './todo';
 
@@ -23,7 +24,10 @@ export class TodoListComponent implements OnInit {
   currentDate: Date = new Date();
   timeUp!: Date;
 
-  constructor(private TryBehaviorSubject: TryBehaviorSubjectService) {}
+  constructor(
+    private TryBehaviorSubject: TryBehaviorSubjectService,
+    private TodoServiceservice: TodoServiceService
+  ) {}
 
   ngOnInit(): void {
     this.TryBehaviorSubject.getTodoList.subscribe(
@@ -65,32 +69,10 @@ export class TodoListComponent implements OnInit {
   }
 
   onStatusChecked(todo: TodoList) {
-    const updatedTodo = { ...todo, status: !todo.status };
-
-    if (this.todoList.length != 0) {
-      this.todoList = this.todoList.filter(
-        (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-      );
-      this.completedList.push(updatedTodo);
-    }
-
-    //store the updated TodoList and completed List into the behavior subject
-    this.TryBehaviorSubject.setTodoList(this.todoList);
-    this.TryBehaviorSubject.setCompletedList(this.completedList);
+    this.TodoServiceservice.onStatusChecked(todo);
   }
 
   onStatusUnchecked(todo: TodoList) {
-    const updatedTodo = { ...todo, status: !todo.status };
-
-    if (this.completedList.length != 0) {
-      this.completedList = this.completedList.filter(
-        (eachTodo: TodoList) => eachTodo.id !== updatedTodo.id
-      );
-      this.todoList.push(updatedTodo);
-    }
-
-    //store the updated TodoList and completed List into the behavior subject
-    this.TryBehaviorSubject.setTodoList(this.todoList);
-    this.TryBehaviorSubject.setCompletedList(this.completedList);
+    this.TodoServiceservice.onStatusUnChecked(todo);
   }
 }
