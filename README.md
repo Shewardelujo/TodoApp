@@ -1,27 +1,40 @@
 # TodoApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
+A Todo App that enables you to organize your schedules ahead of time.
 
-## Development server
+## Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This application allows you to:
 
-## Code scaffolding
+- Create a new Todo (The todo title, detail and due date)
+- View your list of todos
+- Notifies you when a todo date is due
+- Move a todo from Uncompleted to Completed
+- Search for a todo
+- View an individual todo
+- Edit a todo
+- Delete a todo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+There are two implementations that you can use on this application:
 
-## Build
+## Local Storage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- For holding and persisting the data
 
-## Running unit tests
+* To use this implementation, check out to the main branch by running `git checkout main`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Behavioral Subject
 
-## Running end-to-end tests
+- This implementation allows you to use behavioral subject to hold the current data state across the application and upon updating the list using behavioral subject .next() method, at the same time set the updated data state to local storage and only get data from local storage upon initialization the application, this is to ensure persistence upon reloads.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- To use this implementation, check out to the main branch by running `git checkout feat-behavior-subject-implementation`
 
-## Further help
+## How It Works?
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Clone the repository by running `git clone https://github.com/Shewardelujo/TodoApp.git`
+
+* Change directory into the application, `cd TodoApp`
+* Run `npm install` to install dependencies
+* Checkout to the branch that has your preferred implementation
+* Run `ng serve` to start the application
+* Open `http://localhost:4200/` on your browser to interact with the application
